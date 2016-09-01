@@ -3,7 +3,7 @@ import pyautogui
 
 def throw_pokeball(distance):
 	# click bluestack app from the taskbar
-	pyautogui.click(pyautogui.locateCenterOnScreen("blue_stacks_task_icon.png"))
+	pyautogui.click(pyautogui.locateCenterOnScreen("images/blue_stacks_task_icon.png"))
 	# pyautogui.moveTo(1275, 700)
 	pyautogui.moveTo(1384, 580)
 	# short distance
