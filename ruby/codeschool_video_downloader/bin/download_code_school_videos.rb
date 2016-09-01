@@ -4,6 +4,7 @@ require 'open-uri'
 require 'open_uri_redirections'
 
 require './bin/config'
+require './lib/list_provider'
 
 
 class CodeSchoolDownloader
@@ -26,8 +27,8 @@ class CodeSchoolDownloader
 
 
   def download_videos
-    deal_with_screencasts
-    # deal_with_courses
+    # deal_with_screencasts
+    deal_with_courses
   end
 
 
@@ -51,8 +52,8 @@ class CodeSchoolDownloader
     dir_name = DOWNLOAD_LOCATION + '/screencasts'
     create_dir dir_name
     LinkGenerator.screencast_urls.each do |url|
-      download_screencasts url, dir_name, url.split('/').last.gsub('-', ' ')
-      # puts("'#{url}',")
+      # download_screencasts url, dir_name, url.split('/').last.gsub('-', ' ')
+      puts("'#{url}',")
     end
   end
 
@@ -63,69 +64,11 @@ class CodeSchoolDownloader
     create_dir dir_name
 
     # LinkGenerator.course_urls.each do |url|
-    get_links().each do |url|
+    ListProvider.get_video_list().each do |url|
       download url, dir_name
     end
 
-  end
 
-
-  def get_links()
-    return [    
-    'https://www.codeschool.com/courses/powering-up-with-react/videos',
-    'https://www.codeschool.com/courses/try-sql/videos',
-    'https://www.codeschool.com/courses/try-ember/videos',
-    'https://www.codeschool.com/courses/flying-through-python/videos',
-    'https://www.codeschool.com/courses/javascript-road-trip-part-1/videos',
-    'https://www.codeschool.com/courses/javascript-road-trip-part-2/videos',
-    'https://www.codeschool.com/courses/app-evolution-with-swift/videos',
-    'https://www.codeschool.com/courses/es2015-the-shape-of-javascript-to-come/videos',
-    'https://www.codeschool.com/courses/the-sequel-to-sql/videos',
-    'https://www.codeschool.com/courses/the-magical-marvels-of-mongodb/videos',
-    'https://www.codeschool.com/courses/breaking-the-ice-with-regular-expressions/videos',
-    'https://www.codeschool.com/courses/rails-for-zombies-2/videos',
-    'https://www.codeschool.com/courses/try-ruby/videos',
-    'https://www.codeschool.com/courses/rails-for-zombies-redux/videos',
-    'https://www.codeschool.com/courses/rails-testing-for-zombies/videos',
-    'https://www.codeschool.com/courses/ruby-bits-part-2/videos',
-    'https://www.codeschool.com/courses/adventures-in-web-animations/videos',
-    'https://www.codeschool.com/courses/unmasking-html-emails/videos',
-    'https://www.codeschool.com/courses/you-me-svg/videos',
-    'https://www.codeschool.com/courses/staying-sharp-with-angular-js/videos',
-    'https://www.codeschool.com/courses/blasting-off-with-bootstrap/videos',
-    'https://www.codeschool.com/courses/building-blocks-of-express-js/videos',
-    'https://www.codeschool.com/courses/front-end-foundations/videos',
-    'https://www.codeschool.com/courses/mastering-github/videos',
-    'https://www.codeschool.com/courses/shaping-up-with-angular-js/videos',
-    'https://www.codeschool.com/courses/exploring-google-maps-for-ios/videos',
-    'https://www.codeschool.com/courses/surviving-apis-with-rails/videos',
-    'https://www.codeschool.com/courses/javascript-road-trip-part-3/videos',
-    'https://www.codeschool.com/courses/front-end-formations/videos',
-    'https://www.codeschool.com/courses/core-ios-7/videos',
-    'https://www.codeschool.com/courses/rails-4-patterns/videos',
-    'https://www.codeschool.com/courses/fundamentals-of-design/videos',
-    'https://www.codeschool.com/courses/jquery-the-return-flight/videos',
-    'https://www.codeschool.com/courses/ios-operation-mapkit/videos',
-    'https://www.codeschool.com/courses/git-real-2/videos',
-    'https://www.codeschool.com/courses/ios-operation-models/videos',
-    'https://www.codeschool.com/courses/try-objective-c/videos',
-    'https://www.codeschool.com/courses/rails-4-zombie-outlaws/videos',
-    'https://www.codeschool.com/courses/discover-devtools/videos',
-    'https://www.codeschool.com/courses/try-jquery/videos',
-    'https://www.codeschool.com/courses/anatomy-of-backbone-js-part-2/videos',
-    'https://www.codeschool.com/courses/assembling-sass-part-2/videos',
-    'https://www.codeschool.com/courses/try-ios/videos',
-    'https://www.codeschool.com/courses/try-r/videos',
-    'https://www.codeschool.com/courses/assembling-sass/videos',
-    'https://www.codeschool.com/courses/ruby-bits/videos',
-    'https://www.codeschool.com/courses/git-real/videos',
-    'https://www.codeschool.com/courses/try-git/videos',
-    'https://www.codeschool.com/courses/real-time-web-with-node-js/videos',
-    'https://www.codeschool.com/courses/anatomy-of-backbone-js/videos',
-    'https://www.codeschool.com/courses/journey-into-mobile/videos',
-    'https://www.codeschool.com/courses/css-cross-country/videos',
-    'https://www.codeschool.com/courses/coffeescript/videos',
-    'https://www.codeschool.com/courses/the-elements-of-web-design/videos']
   end
 
 
@@ -149,7 +92,7 @@ class CodeSchoolDownloader
     puts("Found #{videos_total} video(s)")
 
     links.each do |course|
-      if counter >= 1 # begin skip
+      if counter >= 0 # begin skip
 
         begin
           puts "Processing video #{counter} of #{videos_total}..."        
@@ -205,7 +148,7 @@ class CodeSchoolDownloader
       puts "Opening video..."
       video_page = Nokogiri::HTML.parse(@browser.html)
       video_url = video_page.css('div#code-school-screencasts video').attribute('src').value
-      puts "VIDEO URL retrieved"
+      puts "VIDEO URL retrieved: #{video_url}"
       puts "Closing video..."
       @browser.back
       name = page.css('h1').text.gsub('Screencast', '').strip.gsub(/\W/, ' ').gsub(/\s+/, ' ').gsub(/\s/, '-')

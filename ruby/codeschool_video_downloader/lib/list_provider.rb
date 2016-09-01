@@ -6,7 +6,15 @@ class ListProvider
     end
 
     def self.get_video_list()
-        return ['https://www.codeschool.com/courses/accelerating-through-angular-2/videos',
+        return [
+'https://www.codeschool.com/courses/try-git/videos',
+'https://www.codeschool.com/courses/try-ios/videos',
+'https://www.codeschool.com/courses/try-jquery/videos',
+'https://www.codeschool.com/courses/try-objective-c/videos',
+'https://www.codeschool.com/courses/try-r/videos',
+'https://www.codeschool.com/courses/try-ruby/videos',
+'https://www.codeschool.com/courses/try-sql/videos',
+'https://www.codeschool.com/courses/accelerating-through-angular-2/videos',
 'https://www.codeschool.com/courses/adventures-in-web-animations/videos',
 'https://www.codeschool.com/courses/anatomy-of-backbone-js-part-2/videos',
 'https://www.codeschool.com/courses/anatomy-of-backbone-js/videos',
@@ -53,15 +61,6 @@ class ListProvider
 'https://www.codeschool.com/courses/the-elements-of-web-design/videos',
 'https://www.codeschool.com/courses/the-magical-marvels-of-mongodb/videos',
 'https://www.codeschool.com/courses/the-sequel-to-sql/videos',
-'https://www.codeschool.com/courses/try-django/videos',
-'https://www.codeschool.com/courses/try-ember/videos',
-'https://www.codeschool.com/courses/try-git/videos',
-'https://www.codeschool.com/courses/try-ios/videos',
-'https://www.codeschool.com/courses/try-jquery/videos',
-'https://www.codeschool.com/courses/try-objective-c/videos',
-'https://www.codeschool.com/courses/try-r/videos',
-'https://www.codeschool.com/courses/try-ruby/videos',
-'https://www.codeschool.com/courses/try-sql/videos',
 'https://www.codeschool.com/courses/unmasking-html-emails/videos',
 'https://www.codeschool.com/courses/you-me-svg/videos'].first(5)
     end
