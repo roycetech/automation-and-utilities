@@ -112,22 +112,24 @@ def enableMarchButtons():
         print('Enable ' + buttonText)
         button.configure(state=tkinter.NORMAL)
 
-
-btnSweep = tkinter.Button(text='Sweep Area', command=sweep)
-btnSweep.pack()
+tkinter.Button(text='Throw Pokéball Far', command=throw3).pack()
 
 
-marchNorth = tkinter.Button(text='March North', state='normal', command=marchNorth)
-marchNorth.pack()
+# btnSweep = tkinter.Button(text='Sweep Area', command=sweep)
+# btnSweep.pack()
 
-marchEast = tkinter.Button(text='March East', command=marchEast)
-marchEast.pack()
 
-marchWest = tkinter.Button(text='March West', command=marchWest)
-marchWest.pack()
+# marchNorth = tkinter.Button(text='March North', state='normal', command=marchNorth)
+# marchNorth.pack()
 
-marchSouth = tkinter.Button(text='March South', command=marchSouth)
-marchSouth.pack()
+# marchEast = tkinter.Button(text='March East', command=marchEast)
+# marchEast.pack()
+
+# marchWest = tkinter.Button(text='March West', command=marchWest)
+# marchWest.pack()
+
+# marchSouth = tkinter.Button(text='March South', command=marchSouth)
+# marchSouth.pack()
 
 
 # btnBerry = tkinter.Button(text='Razz Berry ', command=feed)
@@ -138,7 +140,6 @@ btnNear = tkinter.Button(text='Throw Pokéball Near', command=throw1)
 btnNear.pack()
 
 tkinter.Button(text='Throw Pokéball Medium', command=throw2).pack()
-tkinter.Button(text='Throw Pokéball Far', command=throw3).pack()
 
 
 directionList = ['North', 'East', 'West', 'South']

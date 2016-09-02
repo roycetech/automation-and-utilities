@@ -37,8 +37,8 @@ def move(key, duration):
         sys.exit()
 
 
-print("Starting in 2 Seconds...")
-time.sleep(2)
+print("Starting in 1 Second...")
+time.sleep(1)
 # click bluestack app from the taskbar
 bspos = locateCenterOnScreen("images/blue_stacks_task_icon.png")
 print(bspos)
