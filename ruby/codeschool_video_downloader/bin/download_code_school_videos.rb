@@ -12,7 +12,6 @@ class CodeSchoolDownloader
 
   attr_accessor :browser
   DOWNLOAD_LOCATION = Dir.home + '/Desktop/Codeschool'
-  TIMEOUT = 0
 
 
   def initialize username, password
@@ -22,6 +21,8 @@ class CodeSchoolDownloader
     puts "Logged In!"
 
     create_dir DOWNLOAD_LOCATION
+    @browser.wait
+    sleep(10)
     download_videos
   end
 
@@ -43,6 +44,7 @@ class CodeSchoolDownloader
     t = @browser.text_field :id => 'user_password'
     t.set password
 
+    puts("Placed credentials")
     @browser.button(class: 'form-btn').click
     puts("Logging in...")
   end
@@ -79,6 +81,8 @@ class CodeSchoolDownloader
 
     @browser.goto url
     puts "Loaded videos URL"
+    @browser.wait
+    sleep 3
 
     html = @browser.html
     page = Nokogiri::HTML.parse(html)
@@ -103,7 +107,8 @@ class CodeSchoolDownloader
           puts "URL retrieved"
           puts "Closing video..."
           @browser.links(:class, "modal-close")[3].when_present.fire_event("click")
-          name = passed_in_filename ? passed_in_filename : "#{(counter).to_s.ljust 2}- #{filenames[counter -1]}"
+          index_str = "%02d" % counter
+          name = passed_in_filename ? passed_in_filename : "#{index_str} - #{filenames[counter -1]}"
           filename = "#{sub_dir_name}/#{name}.mp4"
           
           max_retry = 5
@@ -164,22 +169,11 @@ class CodeSchoolDownloader
   end
 
 
-  def download_video()
-
-  end
-
-
   def create_dir filename
     unless File.exists? filename
       FileUtils.mkdir filename
     end
   end
-
-
-  def timeout
-    TIMEOUT + rand(5)
-  end
-
 
 end
 
