@@ -24,7 +24,7 @@ def move(key, duration):
     doQuit = False
     while duration > 0:
         time.sleep(1)
-
+        keyDown(key)
         if position()[0] == 0:
             doQuit = True
             break;
@@ -51,26 +51,9 @@ while (flag):
     moveNorth(8)
     moveEast(8)
     moveSouth(8)
-    moveEast(8)
-    moveNorth(8)
-    moveEast(8)
-    moveSouth(20)
     moveWest(8)
-    moveNorth(8)
-    moveWest(8)
-    moveSouth(8)
-    moveWest(8)
-    moveNorth(8)
-    moveWest(8)
-    moveSouth(8)
-    moveWest(8)
-    moveNorth(20)
-    moveEast(8)
-    moveSouth(8)
-    moveEast(8)
-
     # flag = False
-    print("Back to Origin")
+    # print("Back to Origin")
 	
 	
 	
