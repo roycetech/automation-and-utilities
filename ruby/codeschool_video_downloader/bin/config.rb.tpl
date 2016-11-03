@@ -1,6 +1,4 @@
 class ConfigCodeSchool
-
-  USERNAME = 'username'
-  PASSWORD = 'password'
-
+  USERNAME = 'xxx'.freeze
+  PASSWORD = 'xxx'.freeze
 end
