@@ -6,10 +6,14 @@ require 'open_uri_redirections'
 require './bin/config'
 require './lib/list_provider'
 
+# Set the skip constant START_INDEX
 # Main script
 class CodeSchoolDownloader
   attr_accessor :browser
+
   DOWNLOAD_LOCATION = Dir.home + '/Desktop/Codeschool'
+  START_INDEX = 0
+  END_INDEX = 99
 
   def initialize(username, password)
     @browser = Watir::Browser.new
@@ -87,9 +91,10 @@ class CodeSchoolDownloader
     videos_total = links.size
 
     puts("Found #{videos_total} video(s)")
+    puts "Starting index: #{START_INDEX}"
 
     links.each do |course|
-      if counter >= 0 # begin skip
+      if counter >= START_INDEX && counter <= END_INDEX # begin skip
         begin
           puts "Processing video #{counter} of #{videos_total}..."
           course.when_present.fire_event('click')

@@ -8,7 +8,7 @@ class ListProvider
 
   def self.video_course_urls
     [
-      'accelerating-through-angular-2'
+      'mixing-it-up-with-elixir'
     ].collect { |item| "#{URL_PATH}#{item}/videos" }.first(1)
   end
 end
