@@ -13,10 +13,12 @@ gui.title("Pokébot - Idle")
 gui.geometry("250x260")
 eventTriggered = False
 
+
 # Mouse Position
 def savePosition():
     global position
     position = pyautogui.position()
+
 
 # Mouse Position
 def loadPosition():
@@ -26,14 +28,15 @@ def loadPosition():
     eventTriggered = False
 
 
-
 def feed():
+    global eventTriggered
     print("feed!")
     # global eventTriggered
     # if eventTriggered:
     #     eventTriggered = False
-    #     return        
+    #     return
     eventTriggered = True
+
     def callback():
         savePosition()
         pyautogui.click(1430, 712)
@@ -47,42 +50,52 @@ def feed():
 def sweep():
     pass
 
+
 def throw1():
     throw_comon(1)
+
 
 def throw2():
     throw_comon(2)
 
+
 def throw3():
     throw_comon(3)
+
 
 def throw_comon(throw_type):
     global eventTriggered
     if eventTriggered:
         eventTriggered = False
-        return    
+        return
+
     def callback():
+        global eventTriggered
         savePosition()
         throw_pokeball.throw_pokeball(throw_type)
         loadPosition()
         eventTriggered = False
+
     t = threading.Thread(target=callback)
     t.start()
     eventTriggered = True
 
 
-
 def marchNorth():
     _march(0)
+
 
 def marchEast():
     _march(1)
 
+
 def marchWest():
     _march(2)
 
+
 def marchSouth():
     _march(3)
+
 
 def _march(index):
     btnSweep.config(state='disabled')
@@ -112,14 +125,16 @@ def enableMarchButtons():
         print('Enable ' + buttonText)
         button.configure(state=tkinter.NORMAL)
 
+
 tkinter.Button(text='Throw Pokéball Far', command=throw3).pack()
 
 
-# btnSweep = tkinter.Button(text='Sweep Area', command=sweep)
+btnSweep = tkinter.Button(text='Sweep Area', command=sweep)
 # btnSweep.pack()
 
 
-# marchNorth = tkinter.Button(text='March North', state='normal', command=marchNorth)
+# marchNorth = tkinter.Button(
+#     text='March North', state='normal', command=marchNorth)
 # marchNorth.pack()
 
 # marchEast = tkinter.Button(text='March East', command=marchEast)

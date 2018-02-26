@@ -10,17 +10,17 @@
 
 
 from config import CONFIG
-email = CONFIG['email'];
-password = CONFIG['password'];
-
-
 from selenium import webdriver
-from time import sleep
+
+email = CONFIG['email']
+password = CONFIG['password']
+
 
 browser = webdriver.Firefox()
 browser.get('https://www.packtpub.com/packt/offers/free-learning')
 
-claim_button = browser.find_element_by_css_selector("div.book-claim-token-inner > input.form-submit")
+claim_button = browser.find_element_by_css_selector(
+    "div.book-claim-token-inner > input.form-submit")
 claim_button.click()
 
 
@@ -34,7 +34,8 @@ email_field.submit()
 
 
 # Cache have changed due to page reload, so re-fetch.
-claim_button = browser.find_element_by_css_selector("div.book-claim-token-inner > input.form-submit")
+claim_button = browser.find_element_by_css_selector(
+    "div.book-claim-token-inner > input.form-submit")
 claim_button.click()
 
 browser.quit()

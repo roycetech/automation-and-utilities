@@ -5,18 +5,21 @@ import time
 def moveNorth(duration):
     move('w', duration)
 
+
 def moveSouth(duration):
     move('s', duration)
 
+
 def moveEast(duration):
     move('d', duration)
+
 
 def moveWest(duration):
     move('a', duration)
 
 
 def move(key, duration):
-    print('Pressing down: ' + key);
+    print('Pressing down: ' + key)
     keyDown(key)
     doQuit = False
     while duration > 0:
@@ -24,7 +27,7 @@ def move(key, duration):
 
         if position()[0] == 0:
             doQuit = True
-            break;
+            break
 
         duration -= 1
     keyUp(key)
@@ -40,4 +43,4 @@ time.sleep(2)
 # click bluestack app from the taskbar
 click(locateCenterOnScreen("blue_stacks_task_icon.png"))
 
-moveNorth(60*60)
+moveNorth(60 * 60)
